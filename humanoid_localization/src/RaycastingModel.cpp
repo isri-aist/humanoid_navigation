@@ -21,7 +21,7 @@
 #include <humanoid_localization/RaycastingModel.h>
 
 #include <pcl/point_types.h>
-#include <pcl/ros/conversions.h>
+#include <pcl/conversions.h>
 #include <pcl_ros/transforms.h>
 #include <octomap_ros/conversions.h>
 
