@@ -1,9 +1,9 @@
 # Humanoid Navigation
 
 ## ROS Packages for Humanoid Navigation
-|Version|Kinetic + Ubuntu Xenial|Melodic + Ubuntu Bionic|
-|:---:|:---:|:---:|
-|[![GitHub version](https://badge.fury.io/gh/ROBOTIS-GIT%2Fhumanoid_navigation.svg)](https://badge.fury.io/gh/ROBOTIS-GIT%2Fhumanoid_navigation)|[![Build Status](https://travis-ci.org/ROBOTIS-GIT/humanoid_navigation.svg?branch=kinetic-devel)](https://travis-ci.org/ROBOTIS-GIT/humanoid_navigation)|-|
+|Version|Kinetic + Ubuntu Xenial|Melodic + Ubuntu Bionic|Noetic + Ubuntu Focal|
+|:---:|:---:|:---:|:---:|
+|[![GitHub version](https://badge.fury.io/gh/ROBOTIS-GIT%2Fhumanoid_navigation.svg)](https://badge.fury.io/gh/ROBOTIS-GIT%2Fhumanoid_navigation)|[![Build Status](https://travis-ci.org/ROBOTIS-GIT/humanoid_navigation.svg?branch=kinetic-devel)](https://travis-ci.org/ROBOTIS-GIT/humanoid_navigation)|-|-|
 
 ## Wiki for humanoid_navigation Packages
 - http://wiki.ros.org/humanoid_navigation (metapackage)
@@ -11,6 +11,38 @@
 - http://wiki.ros.org/gridmap_2d
 - http://wiki.ros.org/humanoid_localization
 - http://wiki.ros.org/humanoid_planner_2d
+
+## Installation
+
+### Installation (Ubuntu Focal)
+
+Installation instructions adapted from http://wiki.ros.org/humanoid_navigation
+
+In your catkin workspace:
+
+```sh
+wstool set humanoid_msgs --git https://github.com/ahornung/humanoid_msgs
+wstool set humanoid_navigation --git https://github.com/isri-aist/humanoid_navigation.git
+wstool update
+```
+
+Unfortunately `humanoid_navigation` requires `OpenCV 3.2` which is no longer available on Ubuntu 20.04. To build it from source:
+
+```sh
+git clone -b 3.2.0-patch --recursive git@github.com:arntanguy/opencv.git
+cd opencv
+mkdir build
+cd build
+cmake -DBUILD_opencv_python2=OFF -DBUILD_opencv_python3=OFF ..
+make -j`nproc`
+sudo make install
+```
+
+Then build your catkin workspace:
+
+```sh
+catkin_make
+```
 
 ## Documents related to humanoid_navigation Packages
 - [humanoid_navigation](http://wiki.ros.org/humanoid_navigation): ROS metapackages with footstep planning and localization for humanoid / biped robots. This metapackge contains subpackages like [footstep_planner](http://wiki.ros.org/footstep_planner), [gridmap_2d](http://wiki.ros.org/gridmap_2d), [humanoid_localization](http://wiki.ros.org/humanoid_localization), [humanoid_planner_2d](http://wiki.ros.org/humanoid_planner_2d).
