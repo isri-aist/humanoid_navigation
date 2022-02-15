@@ -31,6 +31,10 @@
 #include "gridmap_2d/GridMap2D.h"
 #include <ros/console.h>
 
+#if CV_VERSION_EPOCH > 3
+#include <opencv2/imgproc/types_c.h>
+#endif
+
 namespace gridmap_2d{
 
 GridMap2D::GridMap2D()
