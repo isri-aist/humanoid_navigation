@@ -36,7 +36,9 @@
 #include <opencv2/imgproc/imgproc.hpp>
 #include <nav_msgs/OccupancyGrid.h>
 
-
+#ifndef CV_VERSION_EPOCH
+  #define CV_VERSION_EPOCH CV_VERSION_MAJOR
+#endif
 
 
 
@@ -129,7 +131,11 @@ public:
   /// @return the cv::Mat binary image.
   const cv::Mat& binaryMap() const {return m_binaryMap;}
   /// @return the size of the cv::Mat binary image. Note that x/y are swapped wrt. height/width
+#if CV_VERSION_EPOCH > 3
+  inline const cv::Size size() const {return m_binaryMap.size();}
+#else
   inline const CvSize size() const {return m_binaryMap.size();}
+#endif
 
   const static uchar FREE = 255;  ///< char value for "free": 255
   const static uchar OCCUPIED = 0; ///< char value for "free": 0
